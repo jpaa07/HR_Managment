@@ -1,0 +1,19 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  
+  <mat-form-field>
+    <input matInput formControlName="username" placeholder="username">
+  </mat-form-field>
+  <span class="danger" *ngIf="!form.get('username').pristine && !form.get('username').value ">
+    field is required</span>
+
+  <br>
+  <mat-form-field>
+    <input matInput formControlName="password" placeholder="password" type="password">
+  </mat-form-field>
+  <span class="danger" *ngIf="!form.get('password').pristine && !form.get('password').value ">
+    field is required</span>
+  
+  <br>
+  <button mat-button mat-stroked-button type="submit" [disabled]="!form.valid">Log In</button>
+
+</form>
