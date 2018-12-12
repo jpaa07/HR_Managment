@@ -1,9 +1,34 @@
-<h1 mat-dialog-title>Hi </h1>
+<h1 mat-dialog-title>{{ submitButtonText }} User</h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+  
+                <mat-form-field>
+                  <input matInput formControlName="name" placeholder="name">
+                </mat-form-field><br>
+              
+                <mat-form-field>
+                  <input matInput formControlName="company" placeholder="company">
+                </mat-form-field><br>
+               
+                <mat-form-field>
+                  <input matInput formControlName="age" placeholder="age" type="number">
+                </mat-form-field><br>
 
+                <mat-form-field>
+                  <input matInput formControlName="birthday" placeholder="birthday" type="date">
+                </mat-form-field><br>
+
+                <mat-form-field>
+                  <input matInput formControlName="favoriteColor" placeholder="Favorite Color">
+                </mat-form-field><br>
+
+                <mat-form-field>
+                  <input matInput formControlName="project" placeholder="project" type="number">
+                </mat-form-field><br>
+
+                <div mat-dialog-actions>
+                    <button mat-button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">{{ submitButtonText }}</button>
+                </div>
+              </form>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button cdkFocusInitial>Ok</button>
-</div>
+

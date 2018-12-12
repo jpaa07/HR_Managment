@@ -5,6 +5,7 @@ import { SectionsComponent } from './sections/sections.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DatabaseService } from './database.service';
 import { EmployeesModule } from './employees/employees.module';
+import { ProjectsModule } from './projects/projects.module';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { EmployeesModule } from './employees/employees.module';
   imports: [
     CommonModule,
     EmployeesModule,
+    ProjectsModule,
     HttpClientInMemoryWebApiModule.forRoot(DatabaseService),
   ],
   exports: []

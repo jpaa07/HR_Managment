@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EmployeesComponent, DialogOverviewExampleDialog } from './employees/employees.component';
+import { EmployeesComponent, EmployeesDialog } from './employees/employees.component';
 import  { HttpClientModule } from '@angular/common/http';
 import {MatTableModule, MatButtonModule, MatIconModule, MatSidenavModule,
-        MatToolbarModule, MatDialogModule} from '@angular/material';
+        MatToolbarModule, MatDialogModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EmployeesService } from './employees.service';
 
 @NgModule({
-  declarations: [EmployeesComponent, DialogOverviewExampleDialog],
+  declarations: [EmployeesComponent, EmployeesDialog],
+  providers: [EmployeesService],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatTableModule,
@@ -17,17 +21,20 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatIconModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
-  entryComponents: [ DialogOverviewExampleDialog],
+  entryComponents: [ EmployeesDialog],
   exports: [
     EmployeesComponent,
-    MatTableModule,
     MatTableModule,
     MatIconModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule, 
+    MatInputModule
   ]
 })
 export class EmployeesModule { }
