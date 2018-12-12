@@ -26,7 +26,7 @@ import { EmployeesService } from './employees.service';
     MatInputModule
   ],
   entryComponents: [ EmployeesDialog],
-  exports: [
+  exports: [ 
     EmployeesComponent,
     MatTableModule,
     MatIconModule,
