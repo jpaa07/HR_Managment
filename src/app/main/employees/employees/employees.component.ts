@@ -4,6 +4,9 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EmployeesService } from '../employees.service';
 import { Observable } from 'rxjs';
+import { ProjectsService } from '../../projects/projects.service';
+import { Project } from '../../projects/projects.model';
+import { RoutingService } from 'src/app/routing.service';
 
 
 @Component({
@@ -21,13 +24,27 @@ export class EmployeesComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'company', 'age', 'birthday', 
     'favoriteColor', 'project', 'options'];
 
-  constructor(public employeesService: EmployeesService, public dialog: MatDialog) { 
+  constructor(public employeesService: EmployeesService, public projectsService: ProjectsService, 
+    public dialog: MatDialog, private routingService: RoutingService) { 
     this.employees$ = employeesService.getEmployees();
   }
 
-  deleteUser(employeeId: number) {
-    this.employeesService.deleteEmployee(employeeId);
+  goToEmployees() {
+    this.routingService.gotoEmployees();
+  }
+  
+  goToProjects() {
+    this.routingService.goToProjects();
+  }
+
+  goToLogin() {
+    this.routingService.goToLogin();
+  }
+
+  deleteUser(employee: Employees) {
+    this.employeesService.deleteEmployee(employee.id);
     this.employees$ = this.employeesService.getEmployees();
+    this.projectsService.removeUserFromProject(employee.project);
   }
 
   openDialog(employee: Employees = null): void {
@@ -55,10 +72,20 @@ export class EmployeesDialog {
 
   form: FormGroup;
   submitButtonText = 'Create';
+  previousTeam;
+  projects$: Project[];
 
+  selectedValue: string;
+  
   constructor(
     public dialogRef: MatDialogRef<EmployeesDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: Employees, private fr: FormBuilder, public employeesService: EmployeesService) {
+    @Inject(MAT_DIALOG_DATA) public data: Employees, private fr: FormBuilder,
+     public employeesService: EmployeesService, public projectsService: ProjectsService) {
+
+      projectsService.getProjects().subscribe((data) => {
+        this.projects$ = data;
+      });
+
       this.form = this.fr.group({
         id: [''],  
         name: ['', Validators.required],
@@ -70,6 +97,7 @@ export class EmployeesDialog {
       })
 
       if (data) {
+        this.previousTeam = data.project;
         this.submitButtonText = 'Update';
         this.form.patchValue({
           id: data.id,
@@ -88,9 +116,14 @@ export class EmployeesDialog {
     switch(this.submitButtonText) {
       case 'Update':
         this.employeesService.updateEmployee(this.form.value);
+        if(this.previousTeam != this.form.value.project) {
+          this.projectsService.removeUserFromProject(this.previousTeam);
+          this.projectsService.addUserToProject(this.form.value.project);
+        }
         break;
       case 'Create': 
         this.employeesService.createEmployee(this.form.value);
+        this.projectsService.addUserToProject(this.form.value.project);
         break;
     }
     this.dialogRef.close();

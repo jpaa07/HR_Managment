@@ -3,14 +3,16 @@ import { CommonModule } from '@angular/common';
 import { EmployeesComponent, EmployeesDialog } from './employees/employees.component';
 import  { HttpClientModule } from '@angular/common/http';
 import {MatTableModule, MatButtonModule, MatIconModule, MatSidenavModule,
-        MatToolbarModule, MatDialogModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+        MatToolbarModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatOptionModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EmployeesService } from './employees.service';
+import { ProjectsService } from '../projects/projects.service';
+import { RoutingService } from 'src/app/routing.service';
 
 @NgModule({
   declarations: [EmployeesComponent, EmployeesDialog],
-  providers: [EmployeesService],
+  providers: [EmployeesService, ProjectsService, RoutingService],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -23,7 +25,9 @@ import { EmployeesService } from './employees.service';
     MatToolbarModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   entryComponents: [ EmployeesDialog],
   exports: [ 
@@ -34,7 +38,9 @@ import { EmployeesService } from './employees.service';
     MatToolbarModule,
     MatDialogModule,
     MatFormFieldModule, 
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule
   ]
 })
 export class EmployeesModule { }

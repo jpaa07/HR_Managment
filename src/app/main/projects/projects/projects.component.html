@@ -5,10 +5,9 @@
 
   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #snav>
-        <button class="menu-button" mat-raised-button color="primary">Home</button><br>
-        <button class="menu-button" mat-raised-button color="primary">Employees</button><br>
-        <button class="menu-button" mat-raised-button color="primary">Projects</button><br>
-        <button class="menu-button menu-logout-button" mat-raised-button color="warn">LogOut</button><br>
+      <button class="menu-button" mat-raised-button color="primary" (click)="goToEmployees()">Employees</button><br>
+      <button class="menu-button" mat-raised-button color="primary" (click)="goToProjects()">Projects</button><br>
+      <button class="menu-button menu-logout-button" mat-raised-button color="warn" (click)="goToLogin()">LogOut</button><br>
     </mat-sidenav>
       
     <mat-sidenav-content>

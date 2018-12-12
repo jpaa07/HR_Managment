@@ -19,6 +19,7 @@ export class EmployeesService {
   }
 
   createEmployee(employee: Employees) {
+    employee.id = null;
     this.http.post<Employees>(this.url, employee).subscribe();
   }
 
@@ -29,4 +30,6 @@ export class EmployeesService {
   deleteEmployee(employeeId: number) {
     this.http.delete(`${this.url}/${employeeId}`).subscribe();
   }
+
+ 
 }

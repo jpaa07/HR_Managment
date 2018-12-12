@@ -7,11 +7,12 @@ import {MatTableModule, MatButtonModule, MatIconModule, MatSidenavModule,
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProjectsService } from './projects.service';
+import { RoutingService } from 'src/app/routing.service';
 
 
 @NgModule({
   declarations: [ProjectsComponent, ProjectsDialog],
-  providers: [ProjectsService],
+  providers: [ProjectsService, RoutingService],
   imports: [
     CommonModule,
     ReactiveFormsModule,

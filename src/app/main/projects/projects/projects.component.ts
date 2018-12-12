@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ProjectsService } from '../projects.service';
 import { Project } from '../projects.model';
+import { RoutingService } from 'src/app/routing.service';
 
 @Component({
   selector: 'app-projects',
@@ -18,8 +19,20 @@ export class ProjectsComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'teamSize', 'clientName', 'options'];
 
-  constructor(public projectsService: ProjectsService, public dialog: MatDialog) { 
+  constructor(public projectsService: ProjectsService, public dialog: MatDialog, private routingService: RoutingService) { 
     this.projects$ = projectsService.getProjects();
+  }
+
+  goToEmployees() {
+    this.routingService.gotoEmployees();
+  }
+  
+  goToProjects() {
+    this.routingService.goToProjects();
+  }
+
+  goToLogin() {
+    this.routingService.goToLogin();
   }
 
   deleteUser(employeeId: number) {
